@@ -25,7 +25,9 @@ jobs:
       - name: Random_String
         id: random_string
         run: |
-          random_string=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
+          sudo apt-get update
+          sudo apt-get install openssl
+          random_string=$(openssl rand -base64 8 | md5sum | cut -c1-10)
           echo "RANDOMSTRING=$random_string" >> "$GITHUB_OUTPUT"
       - name: Get Random_String
         env:
