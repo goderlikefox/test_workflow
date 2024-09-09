@@ -22,10 +22,12 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - name: Set color
-        id: color-selector
-        run: echo "SELECTED_COLOR=green" >> "$GITHUB_OUTPUT"
-      - name: Get color
+      - name: Random_String
+        id: random_string
+        run: |
+          random_string=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
+          echo "RANDOMSTRING=$random_string" >> "$GITHUB_OUTPUT"
+      - name: Get Random_String
         env:
-          SELECTED_COLOR: ${{ steps.color-selector.outputs.SELECTED_COLOR }}
-        run: echo "The selected color is $SELECTED_COLOR"
+          RANDOMSTRING: ${{ steps.random_string.outputs.RANDOMSTRING }}
+        run: echo "The selected color is $RANDOMSTRING"
