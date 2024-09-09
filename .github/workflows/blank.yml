@@ -25,10 +25,8 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
 
-      - name: Generate Value
-        id: generate_step
-        run: echo "::set-output name=MY_VAR::SomeValue"
+      - name: Generate Random_String1
+        id: generate_random_string1
+        run: echo "::set-output name=random_string1::SomeValue"
       - name: Use Value
-        env:
-          MY_VAR: ${{ steps.generate_step.outputs.MY_VAR }}
-        run: echo $MY_VAR
+        run: echo ${{ steps.generate_random_string1.outputs.random_string1 }}
